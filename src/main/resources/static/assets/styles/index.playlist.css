@@ -1,0 +1,349 @@
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css");
+html {
+  height: 100%;
+}
+
+body {
+  font-family: "Pretendard Variable", "Pretendard", -apple-system, "BlinkMacSystemFont", "system-ui", "Roboto", "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  color: white;
+  margin-top: 0;
+  overflow-x: hidden;
+}
+body a {
+  text-decoration: none;
+  color: white;
+}
+
+* {
+  scroll-behavior: smooth;
+}
+
+#nav {
+  top: 0;
+  left: 0;
+  width: 20rem;
+  height: 100%;
+  background-color: black;
+  box-sizing: border-box;
+  font: inherit;
+  color: white;
+  position: fixed;
+  z-index: 1;
+  gap: 0.85rem;
+  align-items: stretch;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+#nav .logo-image {
+  display: flex;
+  align-items: center;
+  background-color: #1e1e1e;
+  border: 0.0625rem solid #333333;
+  border-radius: 0.85rem;
+  padding: 1.5rem 0.5rem;
+  margin: 1.5rem 0.5rem;
+}
+#nav .logo-image .logo-image:hover {
+  cursor: pointer;
+}
+#nav .logo-image .image {
+  margin-right: 0.5rem;
+}
+#nav .logo-image > .title {
+  font-size: 1.8rem;
+  font-weight: 800;
+  text-decoration: none;
+  color: white;
+}
+#nav .item-image {
+  width: 100%;
+  display: flex;
+  list-style-type: none;
+  height: 30px;
+  align-items: center;
+  padding: 0;
+  margin: 0;
+}
+#nav .item-image > .image {
+  height: 100%;
+  margin-right: 0.5rem;
+}
+#nav .primary {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  list-style-type: none;
+  gap: 0.85rem;
+  border: 0.0625rem solid #333333;
+  border-radius: 0.85rem;
+  padding: 1.5rem 0.5rem;
+  margin: 1.5rem 0.5rem;
+  background-color: #1e1e1e;
+}
+#nav .primary li {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+#nav .primary .item-image {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+}
+#nav .primary .item-image .image {
+  height: 100%;
+  width: 100%;
+}
+#nav .primary .text {
+  color: inherit;
+  text-decoration: none;
+  font-size: 1.3rem;
+  margin-left: 0.5rem;
+}
+#nav .playlist {
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+  height: 100%;
+  border: 0.0625rem solid #333333;
+  border-radius: 0.85rem;
+  padding: 1.5rem 1rem;
+  margin: 1.5rem 0.5rem;
+  background-color: #1e1e1e;
+}
+#nav .playlist .add-button {
+  width: 100%;
+  height: 100%;
+  border: 0.0625rem solid #333333;
+  border-radius: 0.5rem;
+  background-color: transparent;
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+#nav .playlist .add-button .icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  color: white;
+}
+#nav .playlist .playlist-container {
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+}
+
+#main {
+  position: relative;
+  left: 30rem;
+  width: 81.5%;
+  height: 100%;
+}
+#main > .main-div {
+  display: inline;
+}
+#main #header {
+  margin-left: 1rem;
+  background-color: #111111;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+  position: sticky;
+  top: 0;
+}
+#main #header > .menu {
+  list-style-type: none;
+  margin-block: 0;
+  margin-inline: 0;
+  padding-inline: 0;
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  gap: 1.25rem;
+  justify-content: flex-start;
+}
+#main #header .label {
+  box-sizing: border-box;
+  border: 0.0625rem solid #444546;
+  border-radius: 0.5rem;
+  color: white;
+  font: inherit;
+  padding-block: 8px;
+  padding-inline: 300px;
+}
+#main #header > .menu > .item > .label {
+  width: 580px;
+  border: none;
+  border-radius: 999px;
+  box-sizing: border-box;
+  padding: 10px 15px;
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+#main #header > .menu > .item > .label > .input {
+  background-color: black;
+  border-radius: 0.8rem;
+  color: white;
+  padding: 10px 15px;
+  border: 0.5rem solid black;
+  flex-grow: 1;
+}
+#main #header > .menu > .item > .label > .input:focus {
+  color: white;
+}
+#main #header .search-button {
+  border: none;
+  border-radius: 0.5rem;
+  color: white;
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 0.08rem;
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+}
+#main #header .login-button {
+  border: none;
+  border-radius: 0.5rem;
+  color: white;
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 0.08rem;
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+}
+#main #header > .menu > .spring {
+  flex-grow: 1;
+}
+#main #header > .button {
+  list-style-type: none;
+}
+#main #header > .button .album-button .item {
+  background-color: black;
+  color: white;
+  margin-right: 0.5rem;
+  width: 3rem;
+  height: 2rem;
+  border: 0.0625rem solid #333333;
+  border-radius: 0.85rem;
+}
+#main .playlist_section {
+  position: relative;
+  width: 100%;
+  height: auto;
+  min-height: 100%;
+}
+#main .table {
+  width: 100%;
+  align-items: center;
+  border-collapse: collapse;
+  position: relative;
+  text-align: center;
+  table-layout: fixed;
+  font-size: 1.1rem;
+  display: flex;
+  gap: 1rem;
+}
+#main .table thead {
+  display: none;
+}
+#main .table th, #main .table td {
+  padding: 10px;
+}
+#main .table tr {
+  border-radius: 10px;
+}
+#main .table tr:hover {
+  background-color: #111111;
+}
+#main .table .song_option:hover i {
+  color: white;
+}
+#main .main .trackList .tbody {
+  display: table-row-group;
+  width: 100%;
+}
+#main .song_thumb {
+  width: 50px;
+}
+#main .song_thumb .inner {
+  width: 50px;
+  height: 50px;
+  overflow: hidden;
+}
+#main .song_thumb .img_thumb {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+}
+#main .song_title, #main .song_artist, #main .song_album {
+  width: 23rem;
+  max-width: 23rem;
+  text-align: left;
+}
+#main .song_artist .link_text {
+  color: gray;
+  font-size: 1rem;
+}
+#main .song_album .link_text {
+  color: gray;
+  font-size: 1rem;
+}
+#main .song_title .inner, #main .song_artist .inner, #main .song_album .inner {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+#main .song_option {
+  width: 50px;
+  text-align: center;
+  cursor: pointer;
+  color: gray;
+}
+
+#footer {
+  position: relative;
+  height: 5rem;
+  transform: translateY(-100%);
+  align-items: center;
+  color: white;
+}
+#footer .menu {
+  list-style-type: none;
+  margin-block: 0;
+  margin-inline: 0;
+  padding-inline: 0;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+#footer .menu .item {
+  letter-spacing: 0.0225rem;
+  margin: 0 1rem;
+}
+#footer .menu .item .link {
+  color: white;
+  text-decoration: none;
+}
+#footer .menu .item .link:hover {
+  filter: brightness(70%);
+}
+
+/*# sourceMappingURL=index.playlist.css.map */

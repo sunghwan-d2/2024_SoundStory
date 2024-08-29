@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ksh.soundstory.mappers.ArtistMapper">
+
+    <insert id="insertArtist"
+            useGeneratedKeys="true"
+            keyColumn="artistId"
+            keyProperty="artistId"
+            parameterType="com.ksh.soundstory.entities.ArtistEntity">
+        INSERT INTO `ss`.`artist`(`name`, `image_data`, `image_content_type`, `image_file_name`, `genre`, `ent`, `grp`)
+        VALUES (#{name},#{imageData},#{imageContentType},#{imageFileName},#{genre},#{ent},#{grp})
+    </insert>
+
+    
+    <delete id="deleteArtist">
+        DELETE
+        FROM `ss`.`artist`
+        WHERE `artist_id`=#{artistId}
+        LIMIT 1
+    </delete>
+
+    <select id="getArtistName" resultType="com.ksh.soundstory.entities.ArtistEntity">
+        SELECT `artist_id`          AS `artistId`,
+               `name`               AS `name`,
+               `image_data`         AS `imageData`,
+               `image_content_type` AS `imageContentType`,
+               `image_file_name`    AS `imageFileName`,
+               `genre`              AS `genre`,
+               `ent`                AS `ent`,
+               `grp`                AS `grp`
+        FROM `ss`.`artist`
+        WHERE `name` = #{name}
+    </select>
+
+    <update id="updateArtist">
+        UPDATE `ss`.`artist`
+        SET `artist_id` = #{artistId},
+        `name` = #{name},
+        `genre` = #{genre},
+        `ent` = #{ent},
+        `grp` = #{grp}
+        WHERE `artist_id` = #{artistId}
+    </update>
+
+    <select id="selectArtistByArtistId" resultType="com.ksh.soundstory.entities.ArtistEntity">
+        SELECT `artist_id`          AS `artistId`,
+               `name`               AS `name`,
+               `image_data`         AS `imageData`,
+               `image_content_type` AS `imageContentType`,
+               `image_file_name`    AS `imageFileName`,
+               `genre`              AS `genre`,
+               `ent`                AS `ent`,
+               `grp`                AS `grp`
+        FROM `ss`.`artist`
+        WHERE `artist_id` = #{artistId}
+    </select>
+
+    <select id="selectPopularArtists" resultType="com.ksh.soundstory.entities.ArtistEntity">
+        SELECT `T1`.`artist_id`      AS `artistId`,
+               `T1`.`name`           AS `name`,
+               `T1`.`genre`          AS `genre`,
+               `T1`.`ent`            AS `ent`,
+               `T1`.`grp`            AS `grp`,
+               COUNT(`T2`.`song_id`) AS `songCount`
+        FROM `ss`.`artist` AS `T1`
+                 LEFT JOIN `ss`.`song` AS `T2` ON `T1`.`artist_id` = `T2`.`artist_id`
+        GROUP BY `T1`.`artist_id`
+        ORDER BY `songCount` DESC
+        LIMIT ${limit}
+    </select>
+
+    <select id="selectAllArtist" resultType="com.ksh.soundstory.entities.ArtistEntity">
+        SELECT `artist_id`          AS `artistId`,
+               `name`               AS `name`,
+               `image_data`         AS `imageData`,
+               `image_content_type` AS `imageContentType`,
+               `image_file_name`    AS `imageFileName`,
+               `genre`              AS `genre`,
+               `ent`                AS `ent`,
+               `grp`                AS `grp`
+        FROM `ss`.`artist`
+        </select>
+
+
+
+</mapper>

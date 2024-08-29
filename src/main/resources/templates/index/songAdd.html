@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>노래 추가</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/assets/styles/songAdd.css}">
+    <script defer type="text/javascript" th:src="@{/assets/scripts/common.js}"></script>
+    <script defer type="text/javascript" th:src="@{/assets/scripts/songAdd.js}"></script>
+
+    <script th:if="${user ==null}">
+        alert('로그인 후 이용해 주세요');
+        location.href="/";
+    </script>
+    <script th:if="${user != null and user.isAdmin == false}">
+        alert('관리자 권한이 필요합니다.');
+        location.href="/";
+    </script>
+<!--    <script th:if="${session.get('user') == null}">-->
+<!--        alert('로그인 후 사용해 주세요.');-->
+<!--        history.back();-->
+<!--    </script>-->
+<!--    <script th:if="${session.get('user') == null and session.user.isAdmin() == false}">-->
+<!--    alert('관리자 권한이 필요합니다.');-->
+<!--        history.back();-->
+<!--    </script>-->
+
+</head>
+<body id="songAdd">
+<div class="title">
+    <h2 class="text">노래 등록</h2>
+    <button class="close" rel="closeButton" type="button">
+        <i class="icon fa-solid fa-x"></i>
+    </button>
+</div>
+<form novalidate class="form">
+    <label class="_obj-label thumbnail" rel="thumbnailLabel">
+        <span class="__text">대표 이미지</span>
+        <input hidden name="thumbnail" type="file">
+        <span class="image-wrapper">
+            <img alt="" class="image" src="">
+            <span class="empty">이미지 선택</span>
+        </span>
+
+    </label>
+    <label class="_obj-label" rel="nameLabel">
+        <span class="__text">노래 제목</span>
+        <input required autocomplete="off" class="_obj-input __field" maxlength="100" minlength="1" name="title"
+               placeholder="노래 제목" spellcheck="false" type="text">
+
+    </label>
+    <label class="_obj-label" rel="artistIdLabel">
+        <span class="__text">아티스트</span>
+        <select required class="_obj-input __field" name="artistId">
+            <option value="">아티스트 선택</option>
+            <option th:each="artist : ${artists}" th:value="${artist.artistId}" th:text="${artist.name}"></option>
+        </select>
+    </label>
+
+    <label class="_obj-label" rel="albumLabel">
+        <span class="__text">앨범 목록</span>
+        <select required class="_obj-input __field" name="albumId">
+            <option value="">앨범 선택</option>
+            <option th:each="album : ${albums}" th:value="${album.albumId}" th:text="${album.title}"></option>
+        </select>
+    </label>
+
+    <label class="_obj-label" rel="videoIdLabel">
+        <span class="__text">비디오 ID </span>
+        <input required autocomplete="off" class="_obj-input __field" maxlength="20" minlength="1" name="videoId"
+               placeholder="비디오 ID"  type="text">
+    </label>
+    <label class="_obj-label" rel="durationLabel">
+        <span class="__text">재생 시간 </span>
+        <input required autocomplete="off" class="_obj-input __field" maxlength="20" minlength="1" name="duration"
+               placeholder="재생 시간" spellcheck="false" type="text">
+    </label>
+    <button class="_obj-button" id="addAnchor" type="submit">등록하기</button>
+</form>
+</body>
+</html>
+

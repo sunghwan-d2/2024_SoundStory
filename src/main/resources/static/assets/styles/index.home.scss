@@ -1,0 +1,432 @@
+@charset "UTF-8";
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css");
+
+
+body {
+  font-family: "Pretendard Variable", "Pretendard", -apple-system, "BlinkMacSystemFont", "system-ui", "Roboto", "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  color: white;
+  overflow-x: hidden;
+  display: block;
+
+
+}
+
+* {
+  scroll-behavior: smooth;
+  list-style-type: none;
+
+  body::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  body::-webkit-scrollbar-track {
+    background-color: #212121;
+  }
+
+  body::-webkit-scrollbar-thumb {
+    background-color: gray;
+    border-radius: 8px;
+  }
+
+  body::-webkit-scrollbar-button {
+    display: none;
+  }
+
+}
+
+#main {
+  margin-left: 20rem;
+  margin-top: 1.5rem;
+  width: 81.5%;
+  height: 100%;
+
+  > .main-div {
+    display: inline;
+  }
+
+
+  section {
+    display: block;
+    background-color: #1e1e1e;
+    padding: 2.5rem 1.5rem;
+    margin-left: 1rem;
+
+  }
+
+  .artist {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+  }
+
+  .artist .artist-container {
+    display: flex;
+
+  }
+
+  .artist .subtitle-container {
+    font-size: 0.7rem;
+    gap: 0.3rem;
+  }
+
+  .artist .title {
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+    font-size: 2.5rem;
+    text-decoration: none;
+    align-items: center;
+    justify-content: center;
+    color: white;
+  }
+
+  .artist .title:hover {
+    pointer-events: none;
+  }
+
+  .artist .list {
+    display: grid;
+    gap: 1.75rem;
+    grid-template-columns: repeat(6, minmax(200px, 1fr));
+
+    list-style-type: none;
+    margin-block: 0;
+    margin-inline: 0;
+    margin-top: 0.75rem;
+    padding-inline: 0;
+
+    .item {
+      width: 11rem;
+      height: 15rem;
+
+    }
+  }
+
+  // 아티스트 리스트
+
+  .artist .list .image {
+    width: 12rem;
+    height: 12rem;
+    border-radius: 50%;
+  }
+
+  // 앨범 크기
+
+  .artist .bottom {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  // 가수 이름과 아티스트 사이 간격
+
+  .artist .bottom .artist-name {
+    text-decoration: none;
+    color: white;
+    cursor: pointer;
+  }
+
+  .artist .bottom .artist-name:hover {
+    text-decoration: underline;
+  }
+
+  .artist .bottom .job-name {
+    text-decoration: none;
+    color: white;
+
+  }
+
+
+  .album {
+  }
+
+  .album .album-container {
+    display: flex;
+  }
+
+  .artist .title-container {
+
+
+    .artist-name {
+      font-size: 1rem;
+      font-weight: 500;
+    }
+  }
+
+  .artist .subtitle-container {
+
+
+    .job-name {
+      font-size: 0.8rem;
+      color: #9e9e9e;
+      font-weight: 600;
+    }
+  }
+
+
+  .album .title {
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+    font-size: 2.5rem;
+    text-decoration: none;
+    align-items: center;
+    justify-content: center;
+    color: white;
+  }
+
+  .album .title:hover {
+    pointer-events: none;
+  }
+
+  .album .list {
+    display: grid;
+    gap: 0.75rem;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    list-style-type: none;
+    margin-block: 0;
+    margin-inline: 0;
+    margin-top: 0.75rem;
+    padding-inline: 0;
+  }
+
+  .album .list .album {
+    width: 9.5rem;
+    height: 10rem;
+  }
+
+  .album .bottom {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .album .bottom .album-name {
+    text-decoration: none;
+    color: white;
+    cursor: pointer;
+  }
+
+  .album .bottom .album-name:hover {
+    text-decoration: underline;
+  }
+
+  .album .bottom .artist-name {
+    text-decoration: none;
+    color: white;
+    cursor: pointer;
+  }
+
+  .album .bottom .artist-name:hover {
+    text-decoration: underline;
+  }
+
+
+  .chart {
+    position: relative;
+    display: block;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+
+
+    .chart-container {
+      position: relative;
+      width: 100%;
+      margin: 0 auto;
+      overflow: hidden;
+    }
+
+    .title {
+      margin-top: 1.5rem;
+      margin-bottom: 1.5rem;
+      font-size: 2.5rem;
+      text-decoration: none;
+      align-items: center;
+      justify-content: center;
+      color: white;
+    }
+
+    .chart-content {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 10px;
+      padding: 0;
+      list-style: none;
+      margin: 0;
+
+
+      .list-item {
+        box-sizing: border-box;
+
+
+        .list-item-row:hover{
+          opacity: 30%;
+
+        }
+
+      }
+
+      @media (max-width: 1300px) {
+        .list-item {
+          width: 50%;
+        }
+      }
+
+      .list-item-content {
+        padding: 0;
+        transition: transform 0.5s ease-in-out;
+      }
+
+      .list-item-row {
+        display: flex;
+        align-items: center;
+        padding: 10px;
+        background-color: #2e2e2e;
+        border-radius: 5px;
+        height: 100px; /* 고정된 높이 설정 */
+
+      }
+
+      .chart-thumb {
+        flex: 0 0 50px;
+        height: 50px;
+        margin-right: 10px;
+
+        .chart-image {
+          width: 100%;
+          height: 100%;
+          border-radius: 5px;
+        }
+        }
+      }
+
+      .chart-rank {
+        flex: 0 0 30px;
+        text-align: center;
+        font-weight: 700;
+        font-size: 12px;
+      }
+
+      .chart-area {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center; /* 수직 정렬 */
+        overflow: visible; /* 내용이 넘칠 경우 숨김에서 보이도록 변경 */
+
+        .chart-song {
+          .chart-title {
+            color: white;
+            font-weight: 600;
+            font-size: 14px;
+            white-space: normal; /* 텍스트 줄바꿈 허용 */
+            overflow: visible; /* 내용이 넘칠 경우 숨김에서 보이도록 변경 */
+            text-overflow: ellipsis; /* 넘치는 텍스트에 "..." 추가 */
+          }
+
+          .chart-title:hover {
+            text-decoration: underline;
+          }
+        }
+
+        .chart-name {
+          margin-top: 4px;
+
+          .chart-artist {
+            color: gray;
+            font-size: 12px;
+            white-space: normal; /* 텍스트 줄바꿈 허용 */
+            overflow: visible; /* 내용이 넘칠 경우 숨김에서 보이도록 변경 */
+            text-overflow: ellipsis; /* 넘치는 텍스트에 "..." 추가 */
+          }
+
+          .chart-artist:hover {
+            text-decoration: underline;
+          }
+        }
+
+      }
+
+    }
+
+    .chart-button {
+      background-color: transparent;
+
+      top: 16.5rem;
+
+      width: 100%;
+      height: 0;
+      display: flex;
+      position: relative;
+      padding: 0;
+      justify-content: space-between;
+      z-index: 3;
+
+      .prevButton {
+
+      }
+
+      .nextButton {
+
+      }
+
+      button {
+        background-color: black;
+
+        width: 40px;
+        height: 40px;
+        border: none;
+        border-radius: 50%;
+        color: white;
+        cursor: pointer;
+        font-size: 20px;
+
+        :focus {
+          outline: none;
+        }
+      }
+
+    }
+
+  }
+
+
+#footer {
+  margin-left: 20rem;
+  color: white;
+
+  .menu {
+    list-style-type: none;
+    margin-block: 0;
+    margin-inline: 0;
+    padding-inline: 0;
+    //margin-top: 2rem;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+
+    .item {
+      letter-spacing: 0.0225rem;
+      margin: 0 1rem;
+
+    }
+
+
+    .item .link {
+      color: white;
+      text-decoration: none;
+    }
+
+    .item .link:hover {
+      filter: brightness(70%);
+    }
+
+  }
+}
+

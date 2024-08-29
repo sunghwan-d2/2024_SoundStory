@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ksh.soundstory.mappers.AlbumMapper">
+
+    <insert id="insertAlbum"
+            useGeneratedKeys="true"
+            keyColumn="albumId"
+            keyProperty="albumId"
+            parameterType="com.ksh.soundstory.entities.AlbumEntity">
+        INSERT INTO `ss`.`album`(`image_data`, `image_content_type`, `image_file_name`, `title`, `artist_id`)
+        VALUES (#{imageData},#{imageContentType},#{imageFileName},#{title},#{artistId})
+    </insert>
+    <select id="selectAllAlbum" resultType="com.ksh.soundstory.entities.AlbumEntity" parameterType="com.ksh.soundstory.dtos.ArtistNameDto">
+        SELECT `T1`.`album_id`           AS `albumId`,
+               `T1`.`image_data`         AS `imageData`,
+               `T1`.`image_content_type` AS `imageContentType`,
+               `T1`.`image_file_name`    AS `imageFileName`,
+               `T1`.`title`              AS `title`,
+               `T1`.`artist_id`          AS `artistId`,
+               `T2`.`name`               AS `artistName`
+        FROM `ss`.`album` AS `T1`
+                 LEFT JOIN `ss`.`artist` AS `T2` ON T1.artist_id = T2.artist_id
+#         아티스트 이름을 가져오는 맵퍼
+    </select>
+
+    <select id="selectAlbumByAlbumId" resultType="com.ksh.soundstory.entities.AlbumEntity">
+        SELECT `album_id`           AS `albumId`,
+               `image_data`         AS `imageData`,
+               `image_content_type` AS `imageContentType`,
+               `image_file_name`    AS `imageFileName`,
+               `title`              AS `title`,
+               `artist_id`          AS `artistId`
+        FROM `ss`.`album`
+        WHERE `album_id` = #{albumId}
+    </select>
+
+    <select id="selectAlbumsByArtistId" resultType="com.ksh.soundstory.entities.AlbumEntity">
+        SELECT
+            `album_id`           AS `albumId`,
+            `image_data`         AS `imageData`,
+            `image_content_type` AS `imageContentType`,
+            `image_file_name`    AS `imageFileName`,
+            `title`              AS `title`,
+            `artist_id`          AS `artistId`
+        FROM `ss`.`album`
+        WHERE `artist_id` = #{artistId}
+    </select>
+
+
+
+
+
+
+
+
+</mapper>

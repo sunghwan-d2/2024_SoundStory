@@ -1,0 +1,483 @@
+@charset "UTF-8";
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css");
+body {
+  font-family: "Pretendard Variable", "Pretendard", -apple-system, "BlinkMacSystemFont", "system-ui", "Roboto", "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  color: white;
+  overflow-x: hidden;
+  display: block;
+}
+
+* {
+  scroll-behavior: smooth;
+  list-style-type: none;
+}
+* body::-webkit-scrollbar {
+  width: 10px;
+}
+* body::-webkit-scrollbar-track {
+  background-color: #212121;
+}
+* body::-webkit-scrollbar-thumb {
+  background-color: gray;
+  border-radius: 8px;
+}
+* body::-webkit-scrollbar-button {
+  display: none;
+}
+
+#nav {
+  top: 0;
+  left: 0;
+  width: 20rem;
+  height: 100%;
+  background-color: black;
+  box-sizing: border-box;
+  font: inherit;
+  color: white;
+  position: fixed;
+  z-index: 1;
+  gap: 0.85rem;
+  align-items: stretch;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+#nav .logo-image {
+  display: flex;
+  position: relative;
+  align-items: center;
+  margin-top: 0.78rem;
+  background-color: #1e1e1e;
+  border: 0.0625rem solid #333333;
+  border-radius: 0.85rem;
+}
+#nav .logo-image .logo-image:hover {
+  cursor: pointer;
+}
+#nav .logo-image .image {
+  margin-right: 0.5rem;
+}
+#nav .logo-image > .title {
+  font-size: 1.8rem;
+  font-weight: 800;
+  text-decoration: none;
+  color: white;
+}
+#nav .item-image {
+  width: 100%;
+  display: flex;
+  list-style-type: none;
+  height: 30px;
+  align-items: center;
+  padding: 0;
+  margin: 0;
+}
+#nav .item-image > .image {
+  height: 100%;
+  margin-right: 0.5rem;
+}
+#nav .primary {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  list-style-type: none;
+  gap: 0.85rem;
+  border: 0.0625rem solid #333333;
+  border-radius: 0.85rem;
+  padding: 1.5rem 0.5rem;
+  margin: 1.5rem 0.5rem;
+  background-color: #1e1e1e;
+}
+#nav .primary li {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+#nav .primary .item-image {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+}
+#nav .primary .item-image .image {
+  height: 100%;
+  width: 100%;
+}
+#nav .primary .text {
+  color: inherit;
+  text-decoration: none;
+  font-size: 1.3rem;
+  margin-left: 0.5rem;
+}
+#nav .playlist {
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+  height: 100%;
+  border: 0.0625rem solid #333333;
+  border-radius: 0.85rem;
+  padding: 1.5rem 1rem;
+  margin: 1.5rem 0.5rem;
+  background-color: #1e1e1e;
+}
+#nav .playlist .add-button {
+  width: 100%;
+  height: 100%;
+  border: 0.0625rem solid #333333;
+  border-radius: 0.5rem;
+  background-color: transparent;
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+#nav .playlist .add-button .icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  color: white;
+}
+#nav .playlist .playlist-container {
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+}
+
+#main {
+  margin-left: 20rem;
+  width: 81.5%;
+  height: 100%;
+}
+#main > .main-div {
+  display: inline;
+}
+#main #header {
+  margin-left: 1rem;
+  background-color: #111111;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+  position: sticky;
+  top: 0;
+}
+#main #header > .menu {
+  list-style-type: none;
+  margin-block: 0;
+  margin-inline: 0;
+  padding-inline: 0;
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  gap: 1.25rem;
+  justify-content: flex-start;
+}
+#main #header .label {
+  box-sizing: border-box;
+  border: 0.0625rem solid #444546;
+  border-radius: 0.5rem;
+  color: white;
+  font: inherit;
+  padding-block: 8px;
+  padding-inline: 300px;
+}
+#main #header > .menu > .item > .label {
+  width: 580px;
+  border: none;
+  border-radius: 999px;
+  box-sizing: border-box;
+  padding: 10px 15px;
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+#main #header > .menu > .item > .label > .input {
+  background-color: black;
+  border-radius: 0.8rem;
+  color: white;
+  padding: 10px 15px;
+  border: 0.5rem solid black;
+  flex-grow: 1;
+}
+#main #header > .menu > .item > .label > .input:focus {
+  color: white;
+}
+#main #header .search-button {
+  border: none;
+  border-radius: 0.5rem;
+  color: white;
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 0.08rem;
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+}
+#main #header .login-button {
+  border: none;
+  border-radius: 0.5rem;
+  color: white;
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 0.08rem;
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+}
+#main #header > .menu > .spring {
+  flex-grow: 1;
+}
+#main #header > .button {
+  list-style-type: none;
+}
+#main #header > .button .album-button .item {
+  background-color: black;
+  color: white;
+  margin-right: 0.5rem;
+  width: 3rem;
+  height: 2rem;
+  border: 0.0625rem solid #333333;
+  border-radius: 0.85rem;
+}
+#main section {
+  display: block;
+  background-color: #1e1e1e;
+  padding: 2.5rem 1.5rem;
+  margin-left: 1rem;
+}
+#main .artist .artist-container {
+  display: flex;
+}
+#main .artist .subtitle-container {
+  font-size: 0.7rem;
+  gap: 0.3rem;
+}
+#main .artist .title {
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+  font-size: 2.5rem;
+  text-decoration: none;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+#main .artist .title:hover {
+  pointer-events: none;
+}
+#main .artist .list {
+  display: grid;
+  gap: 1.75rem;
+  grid-template-columns: repeat(6, minmax(200px, 1fr));
+  list-style-type: none;
+  margin-block: 0;
+  margin-inline: 0;
+  margin-top: 0.75rem;
+  padding-inline: 0;
+}
+#main .artist .list .item {
+  width: 11rem;
+  height: 15rem;
+}
+#main .artist .list .image {
+  width: 12rem;
+  height: 12rem;
+  border-radius: 50%;
+}
+#main .artist .bottom {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+#main .artist .bottom .artist-name {
+  text-decoration: none;
+  color: white;
+  cursor: pointer;
+}
+#main .artist .bottom .artist-name:hover {
+  text-decoration: underline;
+}
+#main .artist .bottom .job-name {
+  text-decoration: none;
+  color: white;
+}
+#main .album .album-container {
+  display: flex;
+}
+#main .artist .title-container .artist-name {
+  font-size: 1rem;
+  font-weight: 500;
+}
+#main .artist .subtitle-container .job-name {
+  font-size: 0.8rem;
+  color: #9e9e9e;
+  font-weight: 600;
+}
+#main .album .title {
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+  font-size: 2.5rem;
+  text-decoration: none;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+#main .album .title:hover {
+  pointer-events: none;
+}
+#main .album .list {
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  list-style-type: none;
+  margin-block: 0;
+  margin-inline: 0;
+  margin-top: 0.75rem;
+  padding-inline: 0;
+}
+#main .album .list .album {
+  width: 9.5rem;
+  height: 10rem;
+}
+#main .album .bottom {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+#main .album .bottom .album-name {
+  text-decoration: none;
+  color: white;
+  cursor: pointer;
+}
+#main .album .bottom .album-name:hover {
+  text-decoration: underline;
+}
+#main .album .bottom .artist-name {
+  text-decoration: none;
+  color: white;
+  cursor: pointer;
+}
+#main .album .bottom .artist-name:hover {
+  text-decoration: underline;
+}
+
+.chart {
+  position: relative;
+  display: block;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+.chart .chart-container {
+  position: relative;
+  width: 100%;
+  margin: 0 auto;
+  overflow: hidden;
+}
+.chart .title {
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+  font-size: 2.5rem;
+  text-decoration: none;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+.chart .chart-content {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+  padding: 0;
+  list-style: none;
+  margin: 0;
+}
+.chart .list-item {
+  box-sizing: border-box;
+}
+.chart .list-item-content {
+  padding: 0;
+}
+.chart .list-item-row {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  background-color: #2e2e2e;
+  border-radius: 5px;
+  height: 100px; /* 고정된 높이 설정 */
+}
+.chart .chart-thumb {
+  flex: 0 0 50px;
+  height: 50px;
+  margin-right: 10px;
+}
+.chart .chart-thumb .chart-image {
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+}
+.chart .chart-rank {
+  flex: 0 0 30px;
+  text-align: center;
+  font-weight: 700;
+  font-size: 12px;
+}
+.chart .chart-area {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* 수직 정렬 */
+  overflow: visible; /* 내용이 넘칠 경우 숨김에서 보이도록 변경 */
+}
+.chart .chart-area .chart-song .chart-title {
+  color: white;
+  font-weight: 600;
+  font-size: 14px;
+  white-space: normal; /* 텍스트 줄바꿈 허용 */
+  overflow: visible; /* 내용이 넘칠 경우 숨김에서 보이도록 변경 */
+  text-overflow: ellipsis; /* 넘치는 텍스트에 "..." 추가 */
+}
+.chart .chart-area .chart-name {
+  margin-top: 4px;
+}
+.chart .chart-area .chart-name .chart-artist {
+  color: gray;
+  font-size: 12px;
+  white-space: normal; /* 텍스트 줄바꿈 허용 */
+  overflow: visible; /* 내용이 넘칠 경우 숨김에서 보이도록 변경 */
+  text-overflow: ellipsis; /* 넘치는 텍스트에 "..." 추가 */
+}
+
+#footer {
+  margin-left: 20rem;
+  color: white;
+}
+#footer .menu {
+  list-style-type: none;
+  margin-block: 0;
+  margin-inline: 0;
+  padding-inline: 0;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+#footer .menu .item {
+  letter-spacing: 0.0225rem;
+  margin: 0 1rem;
+}
+#footer .menu .item .link {
+  color: white;
+  text-decoration: none;
+}
+#footer .menu .item .link:hover {
+  filter: brightness(70%);
+}
+
+/*# sourceMappingURL=index.recommendedAlbum.css.map */

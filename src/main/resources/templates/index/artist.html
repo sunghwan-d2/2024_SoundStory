@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>artist</title>
+    <script src="https://kit.fontawesome.com/6dee20ad07.js" crossorigin="anonymous"></script>
+    <link rel="shortcut icon" th:href="@{/assets/images/soundstoryicon.png}">
+    <link rel="stylesheet" type="text/css" th:href="@{/assets/styles/index.artist.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/assets/styles/index.nav.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/assets/styles/common.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/assets/styles/index._global.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/assets/styles/index.album.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/assets/styles/index.cover.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/assets/styles/index.loading.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/assets/styles/index.recoverDialog.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/assets/styles/index.registerForm.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/assets/styles/index.css}">
+    <link rel="shortcut icon" th:href="@{/assets/images/soundstoryicon.png}">
+    <script defer type="text/javascript" th:src="@{/assets/scripts/common.js}"></script>
+    <script defer type="text/javascript" th:src="@{/assets/scripts/index.album.js}"></script>
+    <script defer type="text/javascript" th:src="@{/assets/scripts/index.cover.js}"></script>
+    <script defer type="text/javascript" th:src="@{/assets/scripts/index.js}"></script>
+    <script defer type="text/javascript" th:src="@{/assets/scripts/index.loading.js}"></script>
+    <script defer type="text/javascript" th:src="@{/assets/scripts/index.loginForm.js}"></script>
+    <script defer type="text/javascript" th:src="@{/assets/scripts/index.recoverDialog.js}"></script>
+    <script defer type="text/javascript" th:src="@{/assets/scripts/index.registerForm.js}"></script>
+    <script defer type="text/javascript" th:src="@{/assets/scripts/index.artist.js}"></script>
+</head>
+<body>
+<th:block th:replace="~{fragments/index/cover.html :: cover}"></th:block>
+<th:block th:replace="~{fragments/index/loading.html :: loading}"></th:block>
+<th:block th:replace="~{fragments/index/loginForm.html :: loginForm}"></th:block>
+<th:block th:replace="~{fragments/index/recoverDialog.html :: recoverDialog}"></th:block>
+<th:block th:replace="~{fragments/index/registerForm.html :: registerForm}"></th:block>
+<nav id="nav">
+    <div class="logo-image">
+        <a target="_self" th:href="@{/}">
+            <img th:src="@{/assets/images/logo-color.png}" alt="홈로고" class="image">
+        </a>
+    </div>
+    <div class="login-section">
+        <div class="nav-login">
+            <a class="login-button" th:if="${session.user == null}" href="#" rel="showLoginCaller" id="show">
+                <i class="fa-solid fa-right-to-bracket"></i>
+                <div class=login-text>로그인</div>
+            </a>
+            <a class="login-button" th:if="${session.user != null}" th:href="@{/user/logout}">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                <div class=login-text>로그아웃</div>
+            </a>
+        </div>
+        <div class="spring"></div>
+        <div class="nav-search">
+            <a th:href="@{/search}" class="nav-search-button">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <div class="search-text">Sound Story 검색</div>
+            </a>
+        </div>
+    </div>
+    <ul class="primary">
+        <li>
+            <a href="#" class="item-image">
+                <img th:src="@{/assets/images/singer.png}" alt="아티스트" class="image"></a>
+            <a th:href="@{/popularArtist}" class="text" type="text">인기 아티스트</a>
+        </li>
+        <li>
+            <a href="#" class="item-image">
+                <img th:src="@{/assets/images/album.png}" alt="앨범" class="image"></a>
+            <a th:href="@{/recommendedAlbum}" class="text" type="text">추천 앨범</a>
+        </li>
+
+    </ul>
+    <div class="playlist">
+        <div class="playlist-container">----플레이리스트----</div>
+        <a class="add-button" th:if="${playlists != null and playlists.size() > 0}"
+           th:href="@{'/playlist?playlistIndex=' + ${playlists[0].index}}">
+            <label>
+                <span>나의 플레이리스트로 이동</span>
+            </label>
+        </a>
+        <div class="playlist-text">
+            <span class="text">나만의 플레이리스트틀 추가해 보세요 !</span>
+        </div>
+    </div>
+
+</nav>
+<main class="main">
+
+    <div class="admin-container" th:if="${session.get('user') != null && session.user.isAdmin() == true}">
+        <div class="admin-container">
+            <a th:href="@{/artist/add}">아티스트 추가하기</a>
+            <a th:href="@{/album/add}">앨범 추가하기</a>
+            <a th:href="@{/song/add}">노래 추가하기</a>
+            <a th:onclick="showEditForm()">수정하기</a>
+            <a href="#" id="deleteAnchor" th:attrappend="data-artist-id=${artist.getArtistId()}">삭제하기</a>
+        </div>
+    </div>
+
+
+    <div class="artist_section">
+        <img th:alt="${artist.getName()}" class="background"
+             th:src="@{'/artist/image?index=' + ${artist.getArtistId()}}">
+        <div class="artist_wrap">
+            <div class="artist_thumb">
+                <img th:alt="${artist.getName()}" th:src="@{'/artist/image?index=' + ${artist.getArtistId()}}"
+                     class="artist_thumb_image">
+            </div>
+
+            <div class="artist_text">
+                <div class="artist_title" th:text="${artist.getName()}"></div>
+                <div class="artist_info">
+                    <span class="artist_info_title">장르</span>
+                    <span class="artist_info_content" th:text="${artist.getGenre()}"></span>
+                </div>
+                <div class="artist_info">
+                    <span class="artist_info_title">소속</span>
+                    <span class="artist_info_content" th:text="${artist.getEnt()}"></span>
+                </div>
+                <div class="artist_info">
+                    <span class="artist_info_title">활동</span>
+                    <span class="artist_info_content" th:text="${artist.getGrp()}"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--    <div id="AddForm" style="display: none;"></div>-->
+    <!-- 관리자가 수정할수 있는 폼-->
+    <div id="editForm" style="display:none;">
+        <form id="artistEditForm" method="post" th:action="@{/artist/update}">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" th:value="${artist.getName()}"><br>
+            <label for="genre">Genre:</label>
+            <input type="text" id="genre" name="genre" th:value="${artist.getGenre()}"><br>
+            <label for="ent">Ent:</label>
+            <input type="text" id="ent" name="ent" th:value="${artist.getEnt()}"><br>
+            <label for="grp">Grp:</label>
+            <input type="text" id="grp" name="grp" th:value="${artist.getGrp()}"><br>
+            <input type="hidden" id="artistId" name="artistId" th:value="${artist.getArtistId()}">
+            <button type="submit">수정</button>
+        </form>
+    </div>
+
+
+    <div class="song_section">
+        <div class="section_title">인기 앨범
+        </div>
+        <div class="trackList">
+            <table class="table">
+                <thead>
+                <tr hidden="hidden">
+                    <th scope="col" class="song_thumb"></th>
+                    <th scope="col" class="song_title"></th>
+                    <th scope="col" class="song_artist"></th>
+                    <th scope="col" class="song_album"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="album:${albums}">
+                    <td class="song_thumb">
+                        <div class="inner">
+                            <img th:src="@{'/album/image?index=' + ${album.getAlbumId()}}"
+                                 th:alt="${album.title + ' 앨범 커버'}"
+                                 class="img_thumb">
+                            <a href="#" role="button"></a>
+                        </div>
+                    </td>
+                    <td class="song_title">
+                        <div class="inner">
+                            <a th:href="@{'/album?albumId='+ ${album.getAlbumId()}}">
+                                <span th:text="${album.getTitle()}"></span>
+                            </a>
+                        </div>
+                    </td>
+                    <td class="song_artist">
+                        <div class="inner">
+                            <a href="" title="" class="link_text">
+                                <span th:text="${artist.getName()}"></span>
+                            </a>
+                        </div>
+                    </td>
+                    <td class="song_album">
+                        <div class="inner">
+                            <a href="#" title="" class="link_text"></a>
+                            <span th:text="${album.getTitle()}"></span>
+                        </div>
+                    </td>
+
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+    <form action="/comment/write" method="post" name="commentForm" class="responseTable" th:data-user="${session.user != null}">
+        <input type="hidden" name="artistId" th:value="${artist.artistId}">
+        <div class="comment-container">
+            <div class="comment_title">댓글 작성</div>
+            <textarea name="content" title="댓글" class="comment_textarea" maxlength="10000" minlength="1" rows="3"
+                      cols="30" placeholder="과도한 비방과 욕설은 삭제될 수 있습니다."></textarea>
+            <button class="comment_submit" type="submit">작성</button>
+        </div>
+    </form>
+
+    <table class="commentTable">
+        <thead>
+        <tr>
+            <th>작성자</th>
+            <th>내용</th>
+            <th>작성일</th>
+            <th>삭제</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${comments == null or comments.length == 0}">
+            <td colspan="5">댓글이 존재하지 않습니다.</td>
+        </tr>
+        <tr th:if="${comments != null}" th:each="comment : ${comments}">
+            <td class="index" style="display: none" th:text="${comment.index}"></td>
+            <td th:text="${comment.nickname}"></td>
+            <td th:text="${comment.content}"></td>
+            <td th:text="${#temporals.format(comment.createdAt, 'yyyy-MM-dd HH:mm')}"></td>
+            <td>
+                <button class="deleteButton" type="button">삭제</button>
+            </td>
+        </tr>
+        </tbody>
+        <tfoot th:if="${comments != null and not #lists.isEmpty(comments)}">
+        <tr>
+            <td colspan="5">
+                <div class="pagination">
+                <span th:if="${pageVo.minPage > 1}">
+                    <a  th:href="@{'?artistId=' + ${artist.artistId} + '&page=' + ${pageVo.minPage - 1}}"></a>
+                </span>
+                    <span th:each="pageNumber : ${#numbers.sequence(pageVo.minPage, pageVo.maxPage)}">
+                    <a th:href="@{'?artistId=' + ${artist.artistId} + '&page=' + ${pageNumber}}" th:text="${pageNumber}" th:class="${pageNumber == pageVo.requestPage ? 'active' : ''}"></a>
+                </span>
+                    <span th:if="${pageVo.maxPage < pageVo.maxPage}">
+                    <a th:href="@{'?artistId=' + ${artist.artistId} + '&page=' + ${pageVo.maxPage + 1}}"></a>
+                </span>
+                </div>
+            </td>
+        </tr>
+        </tfoot>
+    </table>
+
+</main>
+<footer id="footer">
+    <ul class="menu">
+        <li class="item">
+            <a class="link" href="">사운드 스토리 이용약관</a>
+        </li>
+        <li class="item">
+            <a class="link" href="">안전 및 개인정보 보호 센터</a>
+        </li>
+        <li class="item">
+            <a class="link" href=""> 개인정보 처리방침</a>
+        </li>
+        <li class="item">
+            <a class="link" href="">&copy; SoundStory Corp.</a>
+        </li>
+
+    </ul>
+</footer>
+
+
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>아티스트 추가</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/assets/styles/artistAdd.css}">
+    <script defer type="text/javascript" th:src="@{/assets/scripts/common.js}"></script>
+    <script defer type="text/javascript" th:src="@{/assets/scripts/artistAdd.js}"></script>
+
+    <script th:if="${user ==null}">
+        alert('로그인 후 이용해 주세요.');
+        location.href="/";
+    </script>
+    <script th:if="${user != null and user.isAdmin == false}">
+        alert('관리자 권한이 필요합니다.');
+        location.href="/";
+    </script>
+
+    <!--    <script th:if="${session.get('user') == null}">-->
+    <!--        alert('로그인 후 사용해 주세요.');-->
+    <!--        history.back();-->
+    <!--    </script>-->
+    <!--    <script th:if="${session.get('user') == null and session.user.isAdmin() == false}">-->
+    <!--        alert('관리자 권한이 필요합니다.');-->
+    <!--        history.back();-->
+    <!--    </script>-->
+
+</head>
+<body id="artistAdd">
+<div class="title">
+    <h2 class="text">아티스트 등록</h2>
+    <button class="close" rel="closeButton" type="button">
+        <i class="icon fa-solid fa-x"></i>
+    </button>
+</div>
+<form novalidate class="form">
+    <label class="_obj-label thumbnail" rel="thumbnailLabel">
+        <span class="__text">대표 이미지</span>
+        <input hidden name="thumbnail" type="file">
+        <span class="image-wrapper">
+            <img alt="" class="image" src="">
+            <span class="empty">이미지 선택</span>
+        </span>
+
+    </label>
+    <label class="_obj-label" rel="nameLabel">
+        <span class="__text">이름</span>
+        <input required autocomplete="off" class="_obj-input __field" maxlength="50" minlength="1" name="name"
+               placeholder="아티스트 이름" spellcheck="false" type="text">
+
+    </label>
+    <label class="_obj-label" rel="genreLabel">
+        <span class="__text">장르</span>
+        <input required autocomplete="off" class="_obj-input __field" maxlength="50" minlength="1" name="genre"
+               placeholder="아티스트 장르" spellcheck="false" type="text">
+
+    </label>
+    <label class="_obj-label" rel="grpLabel">
+        <span class="__text">소속</span>
+        <input required autocomplete="off" class="_obj-input __field" maxlength="50" minlength="1" name="grp"
+               placeholder="아티스트 소속" spellcheck="false" type="text">
+
+    </label>
+    <label class="_obj-label" rel="entLabel">
+        <span class="__text">활동</span>
+        <input required autocomplete="off" class="_obj-input __field" maxlength="50" minlength="1" name="ent"
+               placeholder="아티스트 활동" spellcheck="false" type="text">
+
+    </label>
+    <button class="_obj-button" id="addAnchor" type="submit">등록하기</button>
+</form>
+</body>
+</html>

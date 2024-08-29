@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Sound Story</title>
+    <script src="https://kit.fontawesome.com/d853797a23.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/assets/styles/index.home.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/assets/styles/common.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/assets/styles/index._global.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/assets/styles/index.album.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/assets/styles/index.artist.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/assets/styles/index.cover.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/assets/styles/artistAdd.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/assets/styles/albumAdd.css}">
+
+    <link rel="stylesheet" type="text/css" th:href="@{/assets/styles/index.loading.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/assets/styles/index.nav.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/assets/styles/index.recoverDialog.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/assets/styles/index.registerForm.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/assets/styles/index.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/assets/styles/index.search.css}">
+    <link rel="shortcut icon" th:href="@{/assets/images/soundstoryicon.png}">
+    <script defer type="text/javascript" th:src="@{/assets/scripts/artistAdd.js}"></script>
+    <script defer type="text/javascript" th:src="@{/assets/scripts/albumAdd.js}"></script>
+    <script defer type="text/javascript" th:src="@{/assets/scripts/index.home.js}"></script>
+    <script defer type="text/javascript" th:src="@{/assets/scripts/common.js}"></script>
+    <script defer type="text/javascript" th:src="@{/assets/scripts/index.album.js}"></script>
+    <script defer type="text/javascript" th:src="@{/assets/scripts/index.cover.js}"></script>
+    <script defer type="text/javascript" th:src="@{/assets/scripts/index.home.js}"></script>
+    <script defer type="text/javascript" th:src="@{/assets/scripts/index.js}"></script>
+    <script defer type="text/javascript" th:src="@{/assets/scripts/song.js}"></script>
+
+    <script defer type="text/javascript" th:src="@{/assets/scripts/index.loading.js}"></script>
+    <script defer type="text/javascript" th:src="@{/assets/scripts/index.loginForm.js}"></script>
+    <script defer type="text/javascript" th:src="@{/assets/scripts/index.recoverDialog.js}"></script>
+    <script defer type="text/javascript" th:src="@{/assets/scripts/index.registerForm.js}"></script>
+
+</head>
+<script th:if="${Login}">
+    alert("로그인 후 이용해 주세요.");
+    location.href = "/";
+</script>
+<body>
+<th:block th:replace="~{fragments/index/cover.html :: cover}"></th:block>
+<th:block th:replace="~{fragments/index/loading.html :: loading}"></th:block>
+<th:block th:replace="~{fragments/index/loginForm.html :: loginForm}"></th:block>
+<th:block th:replace="~{fragments/index/recoverDialog.html :: recoverDialog}"></th:block>
+<th:block th:replace="~{fragments/index/registerForm.html :: registerForm}"></th:block>
+<nav id="nav">
+    <div class="logo-image">
+        <a target="_self" th:href="@{/}">
+            <img th:src="@{/assets/images/logo-color.png}" alt="홈로고" class="image">
+        </a>
+    </div>
+    <div class="login-section">
+        <div class="nav-login">
+            <a class="login-button" th:if="${session.user == null}" href="#" rel="showLoginCaller" id="show">
+                <i class="fa-solid fa-right-to-bracket"></i>
+                <div class=login-text>로그인</div>
+            </a>
+            <a class="login-button" th:if="${session.user != null}" th:href="@{/user/logout}">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                <div class=login-text>로그아웃</div>
+            </a>
+        </div>
+        <div class="spring"></div>
+        <div class="nav-search">
+            <a th:href="@{/search}" class="nav-search-button">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <div class="search-text">Sound Story 검색</div>
+            </a>
+        </div>
+    </div>
+    <ul class="primary">
+        <li>
+            <a href="#" class="item-image">
+                <img th:src="@{/assets/images/singer.png}" alt="아티스트" class="image"></a>
+            <a th:href="@{/popularArtist}" class="text" type="text">인기 아티스트</a>
+        </li>
+        <li>
+            <a href="#" class="item-image">
+                <img th:src="@{/assets/images/album.png}" alt="앨범" class="image"></a>
+            <a th:href="@{/recommendedAlbum}" class="text" type="text">추천 앨범</a>
+        </li>
+
+    </ul>
+    <div class="playlist">
+        <div class="playlist-container">----플레이리스트----</div>
+        <!-- 플레이리스트가 있을 경우, 첫 번째 플레이리스트의 인덱스를 URL 쿼리 매개변수로 사용 -->
+        <a class="add-button" th:if="${playlists != null and playlists.size() > 0}"
+           th:href="@{'/playlist?playlistIndex=' + ${playlists[0].index}}">
+            <label>
+                <span>나의 플레이리스트로 이동</span>
+            </label>
+        </a>
+        <div class="playlist-text">
+            <span class="text">나만의 플레이리스트를 추가해 보세요 !</span>
+        </div>
+    </div>
+
+</nav>
+<main id="main">
+    <div class="main-div">
+        <section class="artist">
+            <div class="artist-container">
+                <div class="title">인기 아티스트</div>
+            </div>
+            <ul class="list">
+                <li class="item" th:each="artist : ${artists}">
+                    <a th:href="@{/artist (artistId=${artist.getArtistId()})}" class="image-wrapper">
+                        <img alt class="image" th:src="@{/artist/image (index=${artist.getArtistId()})}">
+                    </a>
+                    <div class="bottom">
+                        <div class="title-container">
+                            <a th:href="@{/artist (artistId=${artist.getArtistId()})}" th:text="${artist.getName()}"
+                               class="artist-name"></a>
+                        </div>
+                        <div class="subtitle-container">
+                            <div class="job-name">아티스트</div>
+                        </div>
+                    </div>
+                </li>
+
+            </ul>
+        </section>
+        <section class="album">
+            <div class="album-container">
+                <div class="title">추천 앨범</div>
+            </div>
+            <ul class="list">
+                <li class="item" th:each="album : ${albums}">
+                    <a th:href="@{/album (albumId=${album.getAlbumId()})}" class="album-wrapper">
+                        <img alt class="album" th:src="@{/album/image (index=${album.getAlbumId()})}">
+                    </a>
+                    <div class="bottom">
+                        <div class="title-container">
+                            <a class="album-name" th:href="@{/album (albumId=${album.getAlbumId()})}"
+                               th:text="${album.getTitle()}"></a>
+                        </div>
+                        <div class="subtitle-container">
+                            <a class="artist-name" th:href="@{/artist (artistId=${album.getArtistId()})}"
+                               th:text="${album.getArtistName()}"></a>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </section>
+        <section class="chart">
+            <div class="chart-container">
+                <div class="title">추천 차트</div>
+                <div class="">
+                    <ul class="chart-content">
+                        <li class="list-item" th:each="song, songStat : ${songs}">
+                            <ul class="list-item-content">
+                                <li class="list-item-row">
+                                    <div class="chart-thumb">
+                                        <a>
+                                            <img class="chart-image" th:src="@{/song/image (index=${song.songId})}"
+                                                 alt="">
+                                        </a>
+                                    </div>
+                                    <div class="chart-rank" th:text="${songStat.index + 1}">1</div>
+                                    <div class="chart-area">
+                                        <div class="chart-song">
+                                            <a th:href="@{/album (albumId=${song.getAlbumId()})}" class="chart-title"
+                                               th:text="${song.title}"></a>
+                                        </div>
+                                        <div class="chart-name">
+                                            <a th:href="@{/artist (artistId=${song.getArtistId()})}"
+                                               class="chart-artist" th:text="${song.artistName}"></a>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+    </div>
+</main>
+<footer id="footer">
+    <ul class="menu">
+        <li class="item">
+            <a class="link" href="">사운드 스토리 이용약관</a>
+        </li>
+        <li class="item">
+            <a class="link" href="">안전 및 개인정보 보호 센터</a>
+        </li>
+        <li class="item">
+            <a class="link" href=""> 개인정보 처리방침</a>
+        </li>
+        <li class="item">
+            <a class="link" href="">&copy; SoundStory Corp.</a>
+        </li>
+
+    </ul>
+</footer>
+
+
+</body>
+</html>

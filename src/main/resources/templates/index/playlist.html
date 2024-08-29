@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>플레이리스트 재생</title>
+    <script src="https://kit.fontawesome.com/6dee20ad07.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/assets/styles/index.nav.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/assets/styles/index.album.css}">
+    <link rel="shortcut icon" th:href="@{/assets/images/soundstoryicon.png}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script defer type="text/javascript" th:src="@{/assets/scripts/index.album.js}"></script>
+    <script defer type="text/javascript" th:src="@{/assets/scripts/index.playlistSong.js}"></script>
+    <script defer type="text/javascript" th:src="@{/assets/scripts/index.playlist.js}"></script>
+    <script src="https://www.youtube.com/iframe_api"></script>
+</head>
+<script th:if="${Login}">
+    alert("로그인 후 이용해 주세요.");
+    location.href = "/";
+</script>
+<script th:if="${playlistSongs == null || playlistSongs.size() == 0}">
+    alert("노래추가 후 이용하실 수 있는 서비스입니다.");
+    location.href = "/"
+</script>
+<body>
+
+
+<nav id="nav">
+    <div class="logo-image">
+        <a target="_self" th:href="@{/}">
+            <img th:src="@{/assets/images/logo-color.png}" alt="홈로고" class="image">
+        </a>
+    </div>
+    <div class="login-section">
+        <div class="nav-login">
+            <a class="login-button" th:if="${session.user == null}" href="#" rel="showLoginCaller" id="show">
+                <i class="fa-solid fa-right-to-bracket"></i>
+                <div class=login-text>로그인</div>
+            </a>
+            <a class="login-button" th:if="${session.user != null}" th:href="@{/user/logout}">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                <div class=login-text>로그아웃</div>
+            </a>
+        </div>
+        <div class="spring"></div>
+        <div class="nav-search">
+            <a th:href="@{/search}" class="nav-search-button">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <div class="search-text">Sound Story 검색</div>
+            </a>
+        </div>
+    </div>
+    <ul class="primary">
+        <li>
+            <a href="#" class="item-image">
+                <img th:src="@{/assets/images/singer.png}" alt="아티스트" class="image"></a>
+            <a th:href="@{/popularArtist}" class="text" type="text">인기 아티스트</a>
+        </li>
+        <li>
+            <a href="#" class="item-image">
+                <img th:src="@{/assets/images/album.png}" alt="앨범" class="image"></a>
+            <a th:href="@{/recommendedAlbum}" class="text" type="text">추천 앨범</a>
+        </li>
+
+    </ul>
+    <div class="playlist">
+        <div class="playlist-container">----플레이리스트----</div>
+        <!-- 플레이리스트가 있을 경우, 첫 번째 플레이리스트의 인덱스를 URL 쿼리 매개변수로 사용 -->
+        <a class="add-button" th:if="${playlists != null and playlists.size() > 0}"
+           th:href="@{'/playlist?playlistIndex=' + ${playlists[0].index}}">
+            <i class="icon fa-solid fa-plus"></i>
+        </a>
+        <div class="playlist-text">
+            <span class="text">나만의 플레이리스트를 추가해 보세요 !</span>
+        </div>
+    </div>
+
+</nav>
+
+<main class="main" th:if="${playlistSongs != null && playlistSongs.size() > 0}">
+    <div class="album_section">
+        <div class="album_wrap">
+            <div class="album_thumb">
+                <a href="#">
+                    <img th:alt="${playlistSongs.get(0).title}"
+                         th:src="@{'/song/image?index=' + ${playlistSongs.get(0).songId}}" class="album_thumb_image">
+                </a>
+            </div>
+            <div class="album_text">
+                <div class="album_text_top">플레이리스트</div>
+                <div class="album_title">내 플레이리스트</div>
+                <div class="album_info">
+                    <span class="album_info_thumb">
+                        <img class="album_info_image" alt="노래 이미지"
+                             src="https://w1.pngwing.com/pngs/348/1013/png-transparent-black-circle-user-symbol-login-user-profile-rim-black-and-white-line-thumbnail.png">
+                    </span>
+                    <span class="album_info_title" th:text="${user.nickname}"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="music-player">
+        <div class="curr-music">
+            <div class="music_info">
+                <div class="video">
+                    <div class="container">
+                        <iframe id="player" type="text/html" width="560" height="315"
+                                src="https://www.youtube.com/embed/${playlistSongs.get(0).dataVideoId}?enablejsapi=1"
+                                frameborder="0"></iframe>
+                    </div>
+                </div>
+                <div class="title" id="songTitle"></div>
+                <div class="channel" id="songArtist" th:text="${playlistSongs.get(0).artistName}"></div>
+                <div class="progress">
+                    <div class="times">
+                        <div class="curr-time" id="currentTimeDisplay">0:00</div>
+                        <div class="total-time" id="durationDisplay">0:00</div>
+                    </div>
+                    <div class="slider-progress-bar">
+                        <input class="progress-bar" id="progressBar" type="range" min="0" max="1000" step="1" value="0">
+                    </div>
+                    <div class="controls">
+                        <img class="prev" id="prevButton" alt="prev" th:src="@{/assets/images/prev.png}">
+                        <img class="play" id="playPauseButton" alt="play" th:src="@{/assets/images/play.png}">
+                        <img class="pause" alt="pause" th:src="@{/assets/images/pause.png}"style="display: none">
+                        <img class="next" id="nextButton" alt="next" th:src="@{/assets/images/next.png}">
+                    </div>
+                    <div class="volume-control">
+                        <label for="volumeBar">
+                            <img class="volume" alt="volume" th:src="@{/assets/images/volume.png}">
+                        </label>
+                        <input id="volumeBar" type="range" min="0" max="100" value="100">
+                    </div>
+                    <div class="TextWarning">최초 실행시 동영상을 먼저 누르시기 바랍니다.</div>
+                </div>
+            </div>
+        </div>
+        <div class="music-list">
+            <h2 class="list-title">Play List</h2>
+            <p class="desc">유튜브로 재생되기 때문에 유튜브 프리미엄이 있어야 광고가 들리지 않습니다.</p>
+            <div class="music-table" th:each="playlistSong : ${playlistSongs}">
+                <div class="music-item" th:attrappend="data-video-id=${playlistSong.DataVideoId}">
+                    <div class="thumbnail">
+                        <img th:src="@{'/song/image?index=' + ${playlistSong.songId}}" alt="thumbnail" class="ImgThumbnail">
+                    </div>
+                    <div class="text">
+                        <div class="title" th:text="${playlistSong.title}"></div>
+                        <div class="channel" th:text="${playlistSong.artistName}"></div>
+                    </div>
+                    <div class="duration" th:text="${playlistSong.duration}"></div>
+                    <label class="delete">
+                        <img th:src="@{/assets/images/deleted.png}" class="deleted" alt="deleted">
+                        <button style="display: none" class="deletePlaylist"
+                                th:attr="data-song-id=${playlistSong.songId}"
+                                th:if="${session.get('user') != null}"></button>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+
+<footer id="footer">
+    <ul class="menu">
+        <li class="item">
+            <a class="link" href="">사운드 스토리 이용약관</a>
+        </li>
+        <li class="item">
+            <a class="link" href="">안전 및 개인정보 보호 센터</a>
+        </li>
+        <li class="item">
+            <a class="link" href=""> 개인정보 처리방침</a>
+        </li>
+        <li class="item">
+            <a class="link" href="">&copy; SoundStory Corp.</a>
+        </li>
+
+    </ul>
+</footer>
+</body>
+</html>

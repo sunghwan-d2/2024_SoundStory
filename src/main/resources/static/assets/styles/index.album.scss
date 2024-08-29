@@ -1,0 +1,591 @@
+@charset "UTF-8";
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css");
+
+body {
+  font-family: "Pretendard Variable", "Pretendard", -apple-system, "BlinkMacSystemFont", "system-ui", "Roboto", "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  color: white;
+
+  a {
+    text-decoration: none;
+    color: white;
+
+  }
+}
+
+* {
+  scroll-behavior: smooth;
+}
+
+#nav {
+  top: 0;
+  left: 0;
+  width: 20rem;
+  height: 100%;
+  background-color: black;
+  box-sizing: border-box;
+  font: inherit;
+  color: white;
+  position: fixed;
+  z-index: 1;
+  gap: 0.85rem;
+
+  align-items: stretch;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+
+
+  .logo-image {
+    display: flex;
+    align-items: center;
+    //margin-top: 1rem;
+    background-color: #1e1e1e;
+    border: 0.0625rem solid #333333;
+    border-radius: 0.85rem;
+    padding: 1.5rem 0.5rem;
+    margin: 1.5rem 0.5rem;
+
+    .logo-image:hover {
+      cursor: pointer;
+    }
+
+    .image {
+      margin-right: 0.5rem;
+    }
+
+    > .title {
+      font-size: 1.8rem;
+      font-weight: 800;
+      text-decoration: none;
+      color: white;
+
+
+    }
+
+  }
+
+  .item-image {
+    width: 100%;
+    display: flex;
+    list-style-type: none;
+    height: 30px;
+
+    align-items: center;
+    padding: 0;
+    margin: 0;
+
+    > .image {
+      height: 100%;
+      margin-right: 0.5rem;
+    }
+  }
+
+  .primary {
+
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    list-style-type: none;
+    gap: 0.85rem;
+    border: 0.0625rem solid #333333;
+    border-radius: 0.85rem;
+    padding: 1.5rem 0.5rem;
+    margin: 1.5rem 0.5rem;
+    background-color: #1e1e1e;
+
+    li {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+    }
+
+    .item-image {
+      width: 30px;
+      height: 30px;
+      display: flex;
+      align-items: center;
+
+      .image {
+        height: 100%;
+        width: 100%;
+
+      }
+    }
+
+    .text {
+      color: inherit;
+      text-decoration: none;
+      font-size: 1.3rem;
+      margin-left: 0.5rem;
+    }
+  }
+
+  .playlist {
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+    height: 100%;
+    border: 0.0625rem solid #333333;
+    border-radius: 0.85rem;
+    padding: 1.5rem 1rem;
+    margin: 1.5rem 0.5rem;
+    background-color: #1e1e1e;
+
+
+    //.spring {
+    //  height: 50%;
+    //  flex-direction: row;
+    //  flex-grow: 1;
+    //}
+
+    .add-button {
+      width: 100%;
+      height: 100%;
+      border: 0.0625rem solid #333333;
+      border-radius: 0.5rem;
+      background-color: transparent;
+      cursor: pointer;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+
+
+      .icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+        color: white;
+      }
+    }
+
+    .playlist-container {
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      text-align: center;
+    }
+  }
+}
+
+#header {
+  background-color: black;
+
+  > .menu {
+    list-style-type: none;
+    margin-block: 0;
+    margin-inline: 0;
+    padding-inline: 0;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    gap: 1.25rem;
+    justify-content: flex-start;
+  }
+
+  .label {
+    box-sizing: border-box;
+    border: 0.0625rem solid #444546;
+    border-radius: 0.5rem;
+    color: white;
+    font: inherit;
+    padding-block: 8px;
+    padding-inline: 300px;
+  }
+
+  > .menu > .item > .label {
+    width: 580px;
+    border: none;
+    border-radius: 999px;
+    box-sizing: border-box;
+    padding: 10px 15px;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    gap: 10px
+  }
+
+  > .menu > .item > .label > .input {
+    background-color: black;
+    border-radius: 0.8rem;
+    color: white;
+    padding: 10px 15px;
+    border: 0.5rem solid black;
+    flex-grow: 1;
+  }
+
+  > .menu > .item > .label > .input:focus {
+    color: white;
+  }
+
+  .search-button {
+    border: none;
+    border-radius: 0.5rem;
+    color: white;
+
+    font-size: 1rem;
+    font-weight: 500;
+    letter-spacing: 0.08rem;
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+  }
+
+  .login-button {
+    border: none;
+    border-radius: 0.5rem;
+    color: white;
+
+    font-size: 1rem;
+    font-weight: 500;
+    letter-spacing: 0.08rem;
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+  }
+
+  > .menu > .spring {
+    flex-grow: 1;
+  }
+
+  > .button {
+    list-style-type: none;
+
+
+    .album-button .item {
+      background-color: black;
+      color: white;
+
+      margin-right: 0.5rem;
+      width: 3rem;
+      height: 2rem;
+      border: 0.0625rem solid #333333;
+      border-radius: 0.85rem;
+    }
+  }
+}
+
+.main {
+  margin-left: 20rem;
+}
+
+.album_section {
+  top: 0;
+  left: 10rem;
+  width: 70rem;
+  height: 20rem;
+  margin-top: 50px;
+  position: relative;
+  align-items: stretch;
+  display: flex;
+  overflow: hidden;
+
+  > .bg {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    filter: blur(50px);
+    position: absolute;
+    z-index: 0;
+  }
+}
+
+.album_section .album_wrap {
+
+  display: flex;
+  align-items: stretch;
+  flex-direction: row;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  width: 50rem;
+  height: 15rem;
+
+
+}
+
+.album_section .album_wrap .album_thumb .album_thumb_image {
+  top: 1rem;
+  left: -6rem;
+
+  width: 14rem;
+  height: 14rem;
+  position: relative;
+  border-radius: 8px;
+}
+
+.album_section .album_wrap .album_text {
+  top: 1rem;
+  left: -4rem;
+
+
+  width: 20rem;
+  height: 12rem;
+
+  display: flex;
+  position: relative;
+  align-items: stretch;
+  flex-direction: column;
+
+  gap: 0.5rem;
+
+}
+
+.album_section .album_wrap .album_text .album_title {
+  font-size: 4rem;
+  font-weight: 600;
+  width: 40rem;
+}
+
+.album_section .album_wrap .album_text .album_info_thumb {
+  width: 2.5rem;
+  height: 2.5rem;
+}
+
+.album_section .album_wrap .album_text .album_info_image {
+  border-radius: 50%;
+  width: 2.5rem;
+  height: 2.5rem;
+}
+
+.album_section .album_wrap .album_text .album_info {
+
+
+  white-space: nowrap;
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+#footer {
+  color: white;
+  align-items: center;
+
+  .menu {
+    list-style-type: none;
+    margin-block: 0;
+    margin-inline: 0;
+    padding-inline: 0;
+    //margin-top: 2rem;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+
+    .item {
+      letter-spacing: 0.0225rem;
+      margin: 0 1rem;
+
+    }
+
+
+    .item .link {
+      color: white;
+      text-decoration: none;
+    }
+
+    .item .link:hover {
+      filter: brightness(70%);
+    }
+
+
+  }
+}
+
+.music-player {
+  left: 9rem;
+  width: 70rem;
+  position: relative;
+  align-items: stretch;
+  display: flex;
+
+  > .curr-music {
+    flex: 1 1 35rem;
+    overflow: hidden;
+    position: relative;
+
+
+    > .music_info {
+      align-items: center;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      padding: 2rem;
+      position: relative;
+
+      > .video {
+        overflow: hidden;
+
+        > .container {
+          position: relative;
+          height: 49px;
+          padding-bottom: 56.25%;
+
+        }
+      }
+
+      > .title {
+        display: -webkit-box;
+        font-size: 1.5rem;
+        line-height: 1.3rem;
+        margin-top: 1.8rem;
+        max-height: 2.6rem;
+        overflow: hidden;
+        text-align: center;
+        text-overflow: ellipsis;
+      }
+
+      > .channel {
+        color: gray;
+        font-size: 1.1rem;
+        margin-top: 1rem;
+      }
+
+      > .progress {
+        width: 100%;
+
+        > .volume-control {
+          display: flex;
+          justify-content: center;
+          margin-top: 1rem;
+          width: 100%;
+
+          > .volumeBar {
+            width: 10%;
+
+            > .volume {
+              width: 59%;
+            }
+          }
+        }
+
+        > .times {
+          align-items: center;
+          display: flex;
+          font-size: 1.1rem;
+          justify-content: space-between;
+        }
+
+        > .slider-progress-bar {
+          height: 0.3rem;
+          margin-top: 1.1rem;
+
+          > .progress-bar {
+            border-radius: 1rem;
+            box-sizing: border-box;
+            cursor: pointer;
+            left: 0;
+            margin: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 100%;
+
+          }
+        }
+
+        > .controls {
+          align-items: center;
+          display: flex;
+          justify-content: center;
+          margin-top: 1rem;
+          width: 100%;
+        }
+
+        > .TextWarning {
+          align-items: center;
+          display: flex;
+          justify-content: center;
+          margin-top: 1rem;
+          color: gray;
+          font-size: 0.9rem;
+        }
+      }
+    }
+  }
+
+  > .music-list {
+    box-sizing: border-box;
+    display: flex;
+    flex: 2 2 30rem;
+    flex-direction: column;
+    overflow-x: hidden;
+    overflow-y: auto;
+    margin-left: 3rem;
+    width: 100%;
+    max-height: 60vh;
+
+
+
+
+
+    > .list-title {
+      color: #ffffff;
+      font-size: 1.5rem;
+    }
+
+    > .desc {
+      color: gray;
+      margin-top: -0.5rem;
+      font-size: 0.8rem;
+    }
+
+    > .music-table {
+      > .music-item {
+        box-sizing: border-box;
+        column-gap: 1rem;
+        cursor: pointer;
+        display: flex;
+        padding: 0.4rem;
+        width: 100%;
+
+        > .thumbnail {
+          align-items: center;
+          display: flex;
+          height: 100%;
+
+          > .ImgThumbnail {
+            border-radius: 1rem;
+            height: 5rem;
+          }
+
+        }
+
+        > .text {
+          display: flex;
+          flex-direction: column;
+          font-size: 0.9rem;
+          justify-content: space-between;
+          padding: 0.5rem;
+
+          > .title {
+            line-height: 1.4;
+          }
+
+          > .channel {
+            color: gray;
+          }
+        }
+
+        > .duration {
+          color: gray;
+          font-size: 0.8rem;
+          margin: auto 0 auto auto;
+        }
+      }
+    }
+  }
+
+}

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ksh.soundstory.mappers.CommentMapper">
+    <insert id="insertComment"
+            useGeneratedKeys="true"
+            keyColumn="index"
+            keyProperty="index"
+            parameterType="com.ksh.soundstory.entities.CommentEntity">
+        INSERT INTO `ss`.`comments`(`artist_id`, `nickname`, `content`, `created_at`)
+        VALUES (#{artistId}, #{nickname}, #{content}, #{createdAt})
+    </insert>
+
+
+    <select id="selectCommentByIndex" resultType="com.ksh.soundstory.entities.CommentEntity">
+        SELECT `index`      AS `index`,
+               `artist_id`  AS `artistId`,
+               `nickname`   AS `nickname`,
+               `content`    AS `content`,
+               `created_at` AS `createdAt`
+        FROM `ss`.`comments`
+        WHERE `index` = #{index}
+        LIMIT 1
+    </select>
+
+
+    <select id="selectCommentAllByArtistId" resultType="com.ksh.soundstory.entities.CommentEntity">
+        SELECT `index`      AS `index`,
+               `artist_id`  AS `artistId`,
+               `nickname`   AS `nickname`,
+               `content`    AS `content`,
+               `created_at` AS `createdAt`
+        FROM `ss`.`comments`
+        WHERE `artist_id` = #{artistId}
+        ORDER BY `index` DESC
+    </select>
+
+    <select id="selectCommentsByPage" parameterType="com.ksh.soundstory.vos.PageVo"
+            resultType="com.ksh.soundstory.entities.CommentEntity">
+        SELECT `index`      AS `index`,
+               `artist_id`  AS `artistId`,
+               `nickname`   AS `nickname`,
+               `content`    AS `content`,
+               `created_at` AS `createdAt`
+        FROM `ss`.`comments`
+        WHERE `artist_id` = #{artistId}
+        ORDER BY `index` DESC
+        LIMIT #{countPerPage} OFFSET #{offset}
+    </select>
+
+    <select id="getCommentsCount" parameterType="com.ksh.soundstory.vos.PageVo" resultType="int">
+        SELECT COUNT(0)
+        FROM `ss`.`comments`
+        WHERE `artist_id` = #{artistId}
+    </select>
+
+    <delete id="deleteCommentByIndex">
+        DELETE
+        FROM `ss`.`comments`
+        WHERE `index` = #{index}
+        LIMIT 1
+    </delete>
+
+
+</mapper>

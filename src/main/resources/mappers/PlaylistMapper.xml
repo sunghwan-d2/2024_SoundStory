@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ksh.soundstory.mappers.PlaylistMapper">
+
+
+    <insert id="insertPlaylist"
+            useGeneratedKeys="true"
+            keyProperty="index">
+        INSERT INTO `ss`.`playlists` (`email`)
+        VALUES (#{email})
+    </insert>
+
+    <select id="playlistByUserEmail" resultType="com.ksh.soundstory.entities.PlaylistEntity">
+        SELECT `index` AS `index`,
+               `email` AS `email`
+        FROM `ss`.`playlists`
+        WHERE email = #{email}
+    </select>
+
+    <select id="getPlaylistByIndex" resultType="com.ksh.soundstory.entities.PlaylistEntity">
+        SELECT `index` AS `index`,
+               `email` AS `email`
+        FROM `ss`.`playlists`
+        WHERE `index` = #{index}
+    </select>
+
+</mapper>

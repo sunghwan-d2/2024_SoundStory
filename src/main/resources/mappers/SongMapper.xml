@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ksh.soundstory.mappers.SongMapper">
+
+    <insert id="insertSong"
+            useGeneratedKeys="true"
+            keyColumn="songId"
+            keyProperty="songId"
+            parameterType="com.ksh.soundstory.entities.SongEntity">
+        INSERT INTO `ss`.`song`(`image_data`, `image_content_type`, `image_file_name`, `title`, `artist_id`, `album_id`, `data_video_id`, `duration`)
+        VALUES (#{imageData},#{imageContentType},#{imageFileName},#{title},#{artistId},#{albumId},#{dataVideoId},#{duration})
+    </insert>
+
+
+ <select id="selectAlbumIdByIndex" resultType="com.ksh.soundstory.entities.SongEntity">
+     SELECT `song_id`            AS songId,
+            `image_data`         AS `imageData`,
+            `image_content_type` AS `imageContentType`,
+            `image_file_name`    AS `imageFileName`,
+            `title`              AS `title`,
+            `artist_id`          AS `artistId`,
+            `data_video_id`      AS `dataVideoId`,
+            `duration`           AS `duration`,
+            `album_id`           AS `albumId`
+     FROM `ss`.`song`
+     WHERE `album_id` = #{albumId}
+ </select>
+
+    <select id="selectSongIdByIndex" resultType="com.ksh.soundstory.entities.SongEntity">
+        SELECT `song_id`            AS songId,
+               `image_data`         AS `imageData`,
+               `image_content_type` AS `imageContentType`,
+               `image_file_name`    AS `imageFileName`,
+               `title`              AS `title`,
+               `artist_id`          AS `artistId`,
+               `data_video_id`      AS `dataVideoId`,
+               `duration`           AS `duration`,
+               `album_id`           AS `albumId`
+        FROM `ss`.`song`
+        WHERE `song_id` = #{songId}
+    </select>
+
+    <select id="selectAllSong" resultType="com.ksh.soundstory.entities.SongEntity" parameterType="com.ksh.soundstory.dtos.ArtistNameDto">
+        SELECT `T1`.`song_id`            AS songId,
+               `T1`.`image_data`         AS `imageData`,
+               `T1`.`image_content_type` AS `imageContentType`,
+               `T1`.`image_file_name`    AS `imageFileName`,
+               `T1`.`title`              AS `title`,
+               `T1`.`artist_id`          AS `artistId`,
+               `T1`.`data_video_id`      AS `dataVideoId`,
+               `T1`.`duration`           AS `duration`,
+               `T1`.`album_id`           AS `albumId`,
+               `T2`.`name`               AS `artistName`
+        FROM `ss`.`song` AS `T1`
+                 LEFT JOIN `ss`.`artist` AS `T2` ON T1.artist_id = T2.artist_id
+    </select>
+</mapper>
