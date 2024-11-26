@@ -44,8 +44,7 @@
 
 <img src="assets/images/회원가입화면.png" alt="registerPage">
 
-
-<img src="assets/images/회원가입예외처리.png" alt="exceptionregister">
+![회원가입예외처리](https://github.com/user-attachments/assets/125ef89f-e156-43f3-96bd-40d973747a5f)
 - 이메일 주소와 비밀번호 등의 유효성검사가 진행되며 검사를 만족하지 못하는 경우 오류 문구가 표시됩니다.
 <br>
 
@@ -55,27 +54,29 @@
 <br>
 
 ![search](https://github.com/user-attachments/assets/35f67a0f-15cb-4972-bfed-a56d7142031f)
-
+<br>
 
 <b><em>[ 댓글 작성 ] </em>
 <br>
 
 ![comment](https://github.com/user-attachments/assets/8c1e5be4-58b5-4d85-b49b-a078ac22dbd9)
+<br>
 
 
 <b><em>[ 플레이리스트 ] </em>
 <br>
 
 ![addSong](https://github.com/user-attachments/assets/a2ba375f-c1ce-41e9-b0ae-c7fbd2045b7c)
+<br>
 
-1. 플레이리스트 노래추가 
+플레이리스트 노래추가 
 
 ![duplicatesong](https://github.com/user-attachments/assets/402f52a9-736e-48cd-957e-08a026a2ac5b)
 
 <br>
 
+플레이리스트 중복시
 
-2. 플레이리스트 중복시
+![플레이리스트예외처리](https://github.com/user-attachments/assets/fb9dc421-e7c3-4aa9-90f8-945a21971784)
 
-<img src="assets/images/플레이리스트예외처리.png">
 기존 회원중 플레이리스트에 노래가 없다면 상단 경고문으로 예외처리
